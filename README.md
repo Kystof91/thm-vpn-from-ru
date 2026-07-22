@@ -7,6 +7,43 @@
 
 > **Дисклеймер.** Только для доступа к *своим* учебным лабораториям TryHackMe (свой аккаунт/подписка). Не для атак на чужие системы. Всё на свой страх и риск. Туннель иногда отваливается — это ожидаемо для такого костыля.
 
+## Скачать скрипты
+
+Не нужно разбираться в git. Скачай файлы и положи в папку `~/thm-vpn/` (Windows: `%USERPROFILE%\thm-vpn\`).
+
+### Вариант А — весь архив одним кликом
+
+📦 **[Скачать ZIP всего репозитория](https://github.com/Kystof91/thm-vpn-from-ru/archive/refs/heads/main.zip)**
+
+Распакуй → зайди в `macos/` или `windows/` → запускай нужный файл.
+
+### Вариант Б — отдельные файлы (правой кнопкой → «Сохранить как…»)
+
+**macOS**
+
+| Файл | Ссылка |
+|------|--------|
+| Подключить THM | [connect-thm.command](https://raw.githubusercontent.com/Kystof91/thm-vpn-from-ru/main/macos/connect-thm.command) |
+| Отключить + починить интернет | [disconnect-thm.command](https://raw.githubusercontent.com/Kystof91/thm-vpn-from-ru/main/macos/disconnect-thm.command) |
+
+После скачивания в Терминале один раз:
+
+```bash
+mkdir -p ~/thm-vpn
+chmod +x ~/thm-vpn/connect-thm.command ~/thm-vpn/disconnect-thm.command
+```
+
+(если сохранил файлы в другую папку — поправь пути в `chmod`)
+
+**Windows**
+
+| Файл | Ссылка |
+|------|--------|
+| Подключить THM | [connect-thm.bat](https://raw.githubusercontent.com/Kystof91/thm-vpn-from-ru/main/windows/connect-thm.bat) |
+| Отключить | [disconnect-thm.bat](https://raw.githubusercontent.com/Kystof91/thm-vpn-from-ru/main/windows/disconnect-thm.bat) |
+
+⚠️ Свой `.ovpn` с сайта THM **сюда не входит** — его скачиваешь только из кабинета TryHackMe (там логин/ключ). Клади рядом: `~/thm-vpn/thm-tcp.ovpn`.
+
 ## Почему так
 
 1. У части провайдеров в РФ OpenVPN (особенно UDP / «голый» профиль) чувствует себя плохо.
@@ -19,29 +56,24 @@ Happ Plus здесь указан **конкретно** — на нём схе�
 
 ### 0. Подготовка
 
-```bash
-mkdir -p ~/thm-vpn
-# склонируй этот репо куда удобно, например:
-# git clone https://github.com/Kystof91/thm-vpn-from-ru.git ~/thm-vpn/repo
-```
-
-1. Установи [OpenVPN](https://openvpn.net/community-downloads/) (CLI: `brew install openvpn` или пакет с openvpn в PATH).
-2. Установи **Happ Plus**, один раз подключись и проверь, что интернет через него живой.
-3. На сайте THM: **Access → OpenVPN → скачай TCP-профиль (EU-West / TCP 443)**.
-4. Сохрани файл как:
+1. **[Скачай скрипты](#скачать-скрипты)** (ZIP или отдельные файлы) → в `~/thm-vpn/`.
+2. Установи [OpenVPN](https://openvpn.net/community-downloads/) (CLI: `brew install openvpn` или чтобы `openvpn` был в PATH).
+3. Установи **Happ Plus**, подключись, проверь что интернет через него живой.
+4. На сайте THM: **Access → OpenVPN → скачай TCP-профиль (EU-West / TCP 443)**.
+5. Сохрани конфиг как:
 
 ```text
 ~/thm-vpn/thm-tcp.ovpn
 ```
 
-⚠️ В `.ovpn` есть твои учётки — **не коммить и не присылай никому**.
+⚠️ В `.ovpn` есть твои учётки — **никому не отправляй**.
 
 ### 1. Подключение
 
 ```text
 1) Happ Plus → Connect
-2) запусти macos/connect-thm.command
-   (или: bash /path/to/repo/macos/connect-thm.command)
+2) двойной клик по connect-thm.command
+   (или: bash ~/thm-vpn/connect-thm.command)
 3) дождись Initialization Sequence Completed
 4) в комнате THM проверь доступ к IP машины
 ```

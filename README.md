@@ -91,8 +91,8 @@ export THM_OVPN_CONFIG="$HOME/thm-vpn/thm-tcp.ovpn"
 Не убивай Happ крестом в первую очередь — на macOS бывает **залипает NECP kill-switch** («интернет умер до перезагрузки»).
 
 ```text
-1) Ctrl+C в окне OpenVPN (или дождись конца connect-скрипта)
-2) запусти macos/disconnect-thm.command
+1) Ctrl+C в окне OpenVPN (или закрой окно connect-скрипта)
+2) двойной клик / запуск disconnect-thm.command
 ```
 
 Скрипт по шагам:

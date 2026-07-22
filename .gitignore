@@ -1,0 +1,7 @@
+# Never commit your personal OpenVPN profile (contains credentials)
+*.ovpn
+*.ovpn.bak
+.env
+.DS_Store
+*.log
+/tmp/
